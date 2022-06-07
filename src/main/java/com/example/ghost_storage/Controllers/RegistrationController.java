@@ -1,6 +1,7 @@
 package com.example.ghost_storage.Controllers;
 
 import com.example.ghost_storage.Model.Company;
+import com.example.ghost_storage.Model.Role;
 import com.example.ghost_storage.Model.User;
 import com.example.ghost_storage.Services.CompanyService;
 import com.example.ghost_storage.Services.UserService;
@@ -9,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.Console;
+import java.util.Collections;
 import java.util.Map;
 
 @Controller
@@ -34,6 +36,7 @@ public class RegistrationController {
 
         if (!userService.addUser(user, company)) {
             model.put("message", "User exists!");
+            model.put("companies", companyService.getCompanies());
             return "registration";
         }
 
@@ -42,13 +45,15 @@ public class RegistrationController {
 
     @PostMapping("company")
     public String addCompany(User user, @RequestParam String createdCompanyName, Map<String, Object> model) {
-        if (!companyService.addCompany(createdCompanyName, user)){
+        if (!companyService.createCompany(createdCompanyName, user)){
             model.put("message", "Company exists!");
+            model.put("companies", companyService.getCompanies());
             return "registration";
         }
         Company company = companyService.findCompanyByName(createdCompanyName);
         if (!userService.addUser(user, company)) {
             model.put("message", "User exists!");
+            model.put("companies", companyService.getCompanies());
             return "registration";
         }
 

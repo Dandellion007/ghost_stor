@@ -37,9 +37,18 @@ public class User implements UserDetails {
     @Enumerated(EnumType.STRING)
     private Set<Role> roles;
 
+    @ElementCollection(targetClass = CompanyRole.class, fetch = FetchType.EAGER)
+    @CollectionTable(name = "company_role", joinColumns = @JoinColumn(name = "user_id"))
+    @Enumerated(EnumType.STRING)
+    private Set<CompanyRole> company_roles;
+
     public User(){ }
 
     public boolean isAdmin(){ return roles.contains(Role.ADMIN); }
+
+    public boolean isAdminCompany(){ return company_roles.contains(CompanyRole.ADMIN); }
+
+    public boolean isAddInCompany(){ return !company_roles.isEmpty(); }
 
     public boolean isActivated() { return getActivationCode() == null; }
 
@@ -120,5 +129,13 @@ public class User implements UserDetails {
 
     public void setActivationCode(String activationCode) {
         this.activationCode = activationCode;
+    }
+
+    public Set<CompanyRole> getCompany_roles() {
+        return company_roles;
+    }
+
+    public void setCompany_roles(Set<CompanyRole> company_roles) {
+        this.company_roles = company_roles;
     }
 }

@@ -1,6 +1,8 @@
 package com.example.ghost_storage.Controllers;
 
+import com.example.ghost_storage.Services.UserService;
 import com.example.ghost_storage.Storage.FileRepo;
+import com.example.ghost_storage.Storage.UserRepo;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -20,11 +22,13 @@ import java.util.UUID;
 @Controller
 class MainController {
     private final FileRepo fileRepo;
+    private final UserService userService;
 
     @Value("${upload.path}")
     private String uploadPath;
 
-    public MainController(FileRepo fileRepo) {
+    public MainController(FileRepo fileRepo, UserService userService) {
+        this.userService = userService;
         this.fileRepo = fileRepo;
     }
 
@@ -34,7 +38,12 @@ class MainController {
     }
 
     @GetMapping("/main")
-    public String main(@RequestParam(required = false, defaultValue = "") String descFilter, String nameFilter, Map<String, Object> model) {
+    public String main(
+            @AuthenticationPrincipal User user,
+            @RequestParam(required = false, defaultValue = "") String descFilter,
+            String nameFilter, Map<String, Object> model) {
+        if (!user.isAddInCompany())
+            return "notAddCompany";
         Iterable<Data> messages;
         if (descFilter != null && !descFilter.isEmpty()) {
             messages = fileRepo.findByFileDescLike('%' + descFilter + '%');

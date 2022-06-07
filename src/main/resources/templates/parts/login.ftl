@@ -1,6 +1,6 @@
 <#macro login path isRegisterForm>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <form id="form" class="select-wrapper" style="" action=${path}/user method="post" data-state="user">
+    <form id="form" class="select-wrapper" style="" action=${path} method="post" data-state="user">
         <#if isRegisterForm>
             <select class="form-floating mb-3" name="demo-category" id="demo-category">
                 <option data-state="user" value="user">User registration</option>
