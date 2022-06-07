@@ -21,12 +21,16 @@ public class User implements UserDetails {
     private String email;
     private String activationCode;
 
-    @ManyToMany()
-    @JoinTable(
-            name = "user_companies",
-            joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "company_id"))
-    private Set<Company> companies = new HashSet<>();
+    @ManyToOne
+    private Company company;
+
+    public Company getCompany() {
+        return company;
+    }
+
+    public void setCompany(Company company) {
+        this.company = company;
+    }
 
     @ElementCollection(targetClass = Role.class, fetch = FetchType.EAGER)
     @CollectionTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"))
@@ -116,21 +120,5 @@ public class User implements UserDetails {
 
     public void setActivationCode(String activationCode) {
         this.activationCode = activationCode;
-    }
-
-    public void addCompany(Company company){
-        companies.add(company);
-    }
-
-    public void removeCompany(Company company){
-        companies.remove(company);
-    }
-
-    public Set<Company> getCompanies() {
-        return companies;
-    }
-
-    public void setCompanies(Set<Company> companies) {
-        this.companies = companies;
     }
 }
