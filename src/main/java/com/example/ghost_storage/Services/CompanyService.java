@@ -7,6 +7,8 @@ import com.example.ghost_storage.Storage.CompanyRepo;
 import com.example.ghost_storage.Storage.UserRepo;
 import org.springframework.stereotype.Service;
 
+import java.util.Set;
+
 @Service
 public class CompanyService {
     private final UserRepo userRepo;
@@ -19,13 +21,18 @@ public class CompanyService {
         this.mailSender = mailSender;
     }
 
+    public Set<Company> getCompanies(){
+        return companyRepo.findAllByIdNotNull();
+    }
+
+    public Company findCompanyByName(String name) { return companyRepo.findCompanyByName(name); }
+
     public boolean addCompany(String companyName, User user){
         Company companyFromDb = companyRepo.findCompanyByName(companyName);
         if (companyFromDb != null)
             return false;
         Company company = new Company(companyName);
         company.addUser(user);
-        user.setCompany(company);
         companyRepo.save(company);
         return true;
     }
