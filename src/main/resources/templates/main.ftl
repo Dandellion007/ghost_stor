@@ -8,23 +8,19 @@
         <#list messages as message>
             <div class="col-md-6 col-xl-2">
                 <div class="card me-3">
-                    <#if message.filename??>
-                        <img class="card-img-top" src="/static/doc.png">
-                    </#if>
+                    <img class="card-img-top" src="/static/doc.png">
                     <div class="m-2">
-                        <span><font size="2px"><strong>File name</strong> - ${message.name}</font>
+                        <span>
+                            <a href="/document/${message.id}" class="dock_link">${message.name}</a>
                         </span><br>
-                        <a href="/files/${message.filename}" download>Скачать</a><br>
                         <#if isAdmin>
-                           <a href="/delete/${message.id}">Удалить</a>
+                            <a href="/delete/${message.id}">Удалить</a><br>
+                            <a href="/document/${message.id}/edit">Редактировать</a>
                         </#if>
                     </div>
                     <div class="card-footer text-muted">
                         <strong>
-                            <font size="1px">
-                                Author - ${message.authorName}<br>
-                                Desc - ${message.fileDesc}<br>
-                            </font>
+                            <font size="1px">Добавил - ${message.authorName}<br></font>
                         </strong>
                     </div>
                 </div>
