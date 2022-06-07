@@ -13,4 +13,5 @@ public interface FileRepo extends JpaRepository<Data, Long> {
     List<Data> findByAuthorAndFileDescLike(User user, String fileDesc);
     List<Data> findByAuthor(User user);
     List<Data> findById(int id);
+    List<Data> getAll();
 }

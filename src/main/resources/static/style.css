@@ -1,5 +1,17 @@
-body{
-    color: #113;
+#form[data-state="user"] .hide-if-company {
+    display: none;
+    visibility: hidden;
+    user-input: required;
+}
+
+#form[data-state="company"] .hide-if-user {
+    display: none;
+    visibility: hidden;
+}
+
+#form[data-state="all"] .hide-if-all {
+    display: none;
+    visibility: hidden;
 }
 .doc_field_block {
     display: flex;

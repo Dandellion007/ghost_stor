@@ -5,6 +5,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -20,6 +21,13 @@ public class User implements UserDetails {
     private String email;
     private String activationCode;
 
+    @ManyToMany()
+    @JoinTable(
+            name = "user_companies",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "company_id"))
+    private Set<Company> companies = new HashSet<>();
+
     @ElementCollection(targetClass = Role.class, fetch = FetchType.EAGER)
     @CollectionTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"))
     @Enumerated(EnumType.STRING)
@@ -31,9 +39,7 @@ public class User implements UserDetails {
 
     public boolean isActivated() { return getActivationCode() == null; }
 
-    public Long getId() {
-        return id;
-    }
+    public Long getId() { return id; }
 
     public void setId(Long id) {
         this.id = id;
@@ -110,5 +116,21 @@ public class User implements UserDetails {
 
     public void setActivationCode(String activationCode) {
         this.activationCode = activationCode;
+    }
+
+    public void addCompany(Company company){
+        companies.add(company);
+    }
+
+    public void removeCompany(Company company){
+        companies.remove(company);
+    }
+
+    public Set<Company> getCompanies() {
+        return companies;
+    }
+
+    public void setCompanies(Set<Company> companies) {
+        this.companies = companies;
     }
 }
