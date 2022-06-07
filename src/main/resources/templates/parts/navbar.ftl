@@ -11,19 +11,24 @@
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                <li class="nav-item">
-                    <a class="nav-link" aria-current="page" href="/">Home</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" aria-current="page" href="/main">All files</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" aria-current="page" href="/my_docs">My documents</a>
-                </li>
+<#--                <li class="nav-item">-->
+<#--                    <a class="nav-link" aria-current="page" href="/">Home</a>-->
+<#--                </li>-->
                 <#if isAdmin>
-                <li class="nav-item">
-                    <a class="nav-link" aria-current="page" href="/user">Admin panel</a>
-                </li>
+                    <li class="nav-item">
+                        <a class="nav-link" aria-current="page" href="/main">Документы</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" aria-current="page" href="/document">Добавить документ</a>
+<#--                        <a class="nav-link" aria-current="page" href="/add_doc">Добавить документ</a>-->
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" aria-current="page" href="/user">Панель администратора</a>
+                    </li>
+                <#else>
+                    <li class="nav-item">
+                        <a class="nav-link" aria-current="page" href="/main">Документы</a>
+                    </li>
                 </#if>
             </ul>
             <div class="navbar-text me-3">${name}</div>
