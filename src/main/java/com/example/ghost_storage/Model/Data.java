@@ -1,6 +1,8 @@
 package com.example.ghost_storage.Model;
 
 import javax.persistence.*;
+import java.util.Date;
+import java.util.List;
 
 @Entity
 public class Data {
@@ -8,7 +10,25 @@ public class Data {
     @GeneratedValue(strategy=GenerationType.AUTO)
     private Integer id;
 
+    private String codeName;
     private String name;
+    private String OKCcode;
+    private String OKPDcode;
+    private Date adoptionDate;
+    private Date introductionDate;
+    private String developer;
+    private String predecessor;
+    private String contents;
+    @Transient
+    private List<String> keywords;
+    @Transient
+    private List<String> keyPhrases;
+    private String levelOfAcceptance;
+    @Transient
+    private List<String> links;
+    private String changes;
+    private String status;
+    private int referencesAmount;
     private String fileDesc;
 
     @ManyToOne(fetch = FetchType.EAGER)
