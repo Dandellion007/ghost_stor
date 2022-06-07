@@ -6,15 +6,13 @@ import com.example.ghost_storage.Services.CompanyService;
 import com.example.ghost_storage.Services.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.io.Console;
 import java.util.Map;
 
 @Controller
+@RequestMapping("/registration")
 public class RegistrationController {
     private final UserService userService;
     private final CompanyService companyService;
@@ -24,20 +22,17 @@ public class RegistrationController {
         this.userService = userService;
     }
 
-    @GetMapping("/registration")
+    @GetMapping
     public String registration(Map<String, Object> model) {
+        model.put("companies", companyService.getCompanies());
         return "registration";
     }
 
-    @PostMapping("/registration")
+    @PostMapping("user")
     public String addUser(User user, @RequestParam String companyName, Map<String, Object> model) {
-        if (companyName != null) {
-            if (!companyService.addCompany(companyName, user)){
-                model.put("message", "Company exists!");
-                return "registration";
-            }
-        }
-        if (!userService.addUser(user)) {
+        Company company = companyService.findCompanyByName(companyName);
+
+        if (!userService.addUser(user, company)) {
             model.put("message", "User exists!");
             return "registration";
         }
@@ -45,15 +40,18 @@ public class RegistrationController {
         return "check";
     }
 
-    @GetMapping("/activate/{code}")
-    public String activate(Model model, @PathVariable String code) {
-        boolean isActivated = userService.activateUser(code);
+    @PostMapping("company")
+    public String addCompany(User user, @RequestParam String createdCompanyName, Map<String, Object> model) {
+        if (!companyService.addCompany(createdCompanyName, user)){
+            model.put("message", "Company exists!");
+            return "registration";
+        }
+        Company company = companyService.findCompanyByName(createdCompanyName);
+        if (!userService.addUser(user, company)) {
+            model.put("message", "User exists!");
+            return "registration";
+        }
 
-        if (isActivated)
-            model.addAttribute("message", "User successfully activated!");
-        else
-            model.addAttribute("message", "Activation code is not found!");
-
-        return "login";
+        return "check";
     }
 }

@@ -1,5 +1,6 @@
 package com.example.ghost_storage.Services;
 
+import com.example.ghost_storage.Model.Company;
 import com.example.ghost_storage.Model.Role;
 import com.example.ghost_storage.Model.User;
 import com.example.ghost_storage.Storage.UserRepo;
@@ -27,13 +28,14 @@ public class UserService implements UserDetailsService {
         return userRepo.findByUsername(s);
     }
 
-    public boolean addUser(User user){
+    public boolean addUser(User user, Company company){
         User userFromDb = userRepo.findByUsername(user.getUsername());
 
         if (userFromDb != null)
             return false;
 
         user.setActive(true);
+        user.setCompany(company);
         user.setRoles(Collections.singleton(Role.USER));
         user.setActivationCode(UUID.randomUUID().toString());
 
