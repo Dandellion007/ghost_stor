@@ -25,7 +25,7 @@ public class CompanyService {
             return false;
         Company company = new Company(companyName);
         company.addUser(user);
-        user.addCompany(company);
+        user.setCompany(company);
         companyRepo.save(company);
         return true;
     }

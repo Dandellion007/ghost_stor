@@ -17,7 +17,7 @@ public class Company {
 
     private String name;
 
-    @ManyToMany(mappedBy = "companies", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "company", fetch = FetchType.EAGER)
     private Set<User> users = new HashSet<>();
 
     public Company(){ }
@@ -42,19 +42,19 @@ public class Company {
         this.users = users;
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
     public void addUser(User user){
         users.add(user);
     }
 
     public void removeUser(User user){
         users.remove(user);
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 }
