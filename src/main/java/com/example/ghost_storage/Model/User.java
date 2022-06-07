@@ -24,14 +24,6 @@ public class User implements UserDetails {
     @ManyToOne
     private Company company;
 
-    public Company getCompany() {
-        return company;
-    }
-
-    public void setCompany(Company company) {
-        this.company = company;
-    }
-
     @ElementCollection(targetClass = Role.class, fetch = FetchType.EAGER)
     @CollectionTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"))
     @Enumerated(EnumType.STRING)
@@ -44,11 +36,19 @@ public class User implements UserDetails {
 
     public User(){ }
 
+    public Company getCompany() {
+        return company;
+    }
+
+    public void setCompany(Company company) {
+        this.company = company;
+    }
+
     public boolean isAdmin(){ return roles.contains(Role.ADMIN); }
 
     public boolean isAdminCompany(){ return company_roles.contains(CompanyRole.ADMIN); }
 
-    public boolean isAddInCompany(){ return !company_roles.isEmpty(); }
+    public boolean isAddInCompany(){ return !company_roles.contains(CompanyRole.REQUEST); }
 
     public boolean isActivated() { return getActivationCode() == null; }
 

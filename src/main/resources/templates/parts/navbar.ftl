@@ -30,6 +30,11 @@
                         <a class="nav-link" aria-current="page" href="/main">Документы</a>
                     </li>
                 </#if>
+                <#if isCompanyAdmin>
+                    <li class="nav-item">
+                        <a class="nav-link" aria-current="page" href="/company/requests">Requests to company</a>
+                    </li>
+                </#if>
             </ul>
             <div class="navbar-text me-3">${name}</div>
             <#if name != "unknown">

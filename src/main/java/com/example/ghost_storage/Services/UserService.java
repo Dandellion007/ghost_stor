@@ -1,6 +1,7 @@
 package com.example.ghost_storage.Services;
 
 import com.example.ghost_storage.Model.Company;
+import com.example.ghost_storage.Model.CompanyRole;
 import com.example.ghost_storage.Model.Role;
 import com.example.ghost_storage.Model.User;
 import com.example.ghost_storage.Storage.UserRepo;
@@ -11,6 +12,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
 import java.util.Collections;
+import java.util.HashSet;
+import java.util.Optional;
 import java.util.UUID;
 
 @Service
@@ -28,14 +31,25 @@ public class UserService implements UserDetailsService {
         return userRepo.findByUsername(s);
     }
 
+    public boolean addUserInCompany(String id) {
+        User user = userRepo.findUserById(Long.parseLong(id));
+        if (user == null)
+            return false;
+        user.getCompany_roles().clear();
+        user.getCompany_roles().add(CompanyRole.USER);
+        userRepo.save(user);
+        return true;
+    }
+
     public boolean addUser(User user, Company company){
-        User userFromDb = userRepo.findByUsername(user.getUsername());
+        User userFromDb = userRepo.findByUsernameOrEmail(user.getUsername(), user.getEmail());
 
         if (userFromDb != null)
             return false;
 
         user.setActive(true);
         user.setCompany(company);
+        user.setRoles(Collections.singleton(Role.USER));
         user.setActivationCode(UUID.randomUUID().toString());
 
         userRepo.save(user);

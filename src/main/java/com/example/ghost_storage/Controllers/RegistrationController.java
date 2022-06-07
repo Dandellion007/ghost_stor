@@ -1,6 +1,7 @@
 package com.example.ghost_storage.Controllers;
 
 import com.example.ghost_storage.Model.Company;
+import com.example.ghost_storage.Model.CompanyRole;
 import com.example.ghost_storage.Model.Role;
 import com.example.ghost_storage.Model.User;
 import com.example.ghost_storage.Services.CompanyService;
@@ -34,8 +35,9 @@ public class RegistrationController {
     public String addUser(User user, @RequestParam String companyName, Map<String, Object> model) {
         Company company = companyService.findCompanyByName(companyName);
 
+        user.setCompany_roles(Collections.singleton(CompanyRole.REQUEST));
         if (!userService.addUser(user, company)) {
-            model.put("message", "User exists!");
+            model.put("message", "Username or email exists!");
             model.put("companies", companyService.getCompanies());
             return "registration";
         }
@@ -52,7 +54,7 @@ public class RegistrationController {
         }
         Company company = companyService.findCompanyByName(createdCompanyName);
         if (!userService.addUser(user, company)) {
-            model.put("message", "User exists!");
+            model.put("message", "Username or email exists!");
             model.put("companies", companyService.getCompanies());
             return "registration";
         }

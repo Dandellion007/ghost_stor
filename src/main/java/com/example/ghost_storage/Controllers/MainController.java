@@ -15,7 +15,9 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 import java.util.UUID;
 
 
@@ -52,8 +54,14 @@ class MainController {
         } else {
             messages = fileRepo.findAll();
         }
+        Set<Data> resultFiles = new HashSet<>();
+        messages.forEach(file ->
+        {
+            if (file.getAuthor().getCompany().getId().equals(user.getCompany().getId()))
+                resultFiles.add(file);
+        });
 
-        model.put("messages", messages);
+        model.put("messages", resultFiles);
         model.put("formAction", "/main");
         model.put("descFilter", descFilter);
         model.put("nameFilter", nameFilter);

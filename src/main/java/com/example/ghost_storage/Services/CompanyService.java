@@ -10,6 +10,7 @@ import com.example.ghost_storage.Storage.UserRepo;
 import org.springframework.stereotype.Service;
 
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.Set;
 
 @Service
@@ -26,6 +27,16 @@ public class CompanyService {
 
     public Set<Company> getCompanies(){
         return companyRepo.findAllByIdNotNull();
+    }
+
+    public Set<User> getUsersRequests(Company company){
+        Set<User> result = new HashSet<>();
+        Set<User> allUsers = userRepo.findByCompany(company);
+        allUsers.forEach(user -> {
+            if (!user.isAddInCompany())
+                result.add(user);
+        });
+        return result;
     }
 
     public Company findCompanyByName(String name) { return companyRepo.findCompanyByName(name); }

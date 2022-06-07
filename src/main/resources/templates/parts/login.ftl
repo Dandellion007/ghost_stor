@@ -24,7 +24,7 @@
                 <input type="text" name="createdCompanyName" class="form-control" id="floatingCompany" placeholder="Urfu"/>
                 <label for="floatingCompany">Company Name</label>
             </div>
-            <select name="companyName" required class="form-floating mb-3 hide-if-user" id="companyId">
+            <select name="companyName" class="form-floating mb-3 hide-if-user" id="companyId">
                 <#list companies as company>
                 <option data-state=${company.id} value=${company.name}>${company.name}</option>
                 </#list>
