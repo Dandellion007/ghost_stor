@@ -82,7 +82,6 @@
                         <#if document??> value="${document.referencesAmount}" </#if>
                 >
             </div>
->>>>>>> document_edit_page
 <#--            <div class="form-group mb-3">-->
 <#--                <div class="custom-file">-->
 <#--                    <input type="file" name="file" id="customFile" required>-->
@@ -96,7 +95,3 @@
         </form>
     </div>
 </@c.page>
-<<<<<<< HEAD
-=======
-
->>>>>>> document_edit_page
