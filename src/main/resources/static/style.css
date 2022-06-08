@@ -1,3 +1,6 @@
+body{
+    color: #113;
+}
 #form[data-state="user"] .hide-if-company {
     display: none;
     visibility: hidden;
@@ -14,8 +17,11 @@
     visibility: hidden;
 }
 .doc_field_block {
-    display: flex;
-    margin-top: 20px;
+    display: flex !important;
+    margin-top: 10px;
+    min-width: 300px;
+    width: fit-content !important;
+
 }
 .doc_field_title {
     margin-right: 10px;
@@ -29,5 +35,3 @@
     font-weight: bold;
     color: black;
 }
-
-

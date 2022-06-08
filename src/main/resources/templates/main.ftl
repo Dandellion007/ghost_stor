@@ -14,7 +14,8 @@
                             <a href="/document/${message.id}" class="dock_link">${message.name}</a>
                         </span><br>
                         <#if isAdmin>
-                           <a href="/delete/${message.id}">Удалить</a>
+                            <a href="/delete/${message.id}">Удалить</a><br>
+                            <a href="/document/${message.id}/edit">Редактировать</a>
                         </#if>
                     </div>
                     <div class="card-footer text-muted">

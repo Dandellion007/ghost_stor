@@ -16,11 +16,10 @@
 <#--                </li>-->
                 <#if isAdmin>
                     <li class="nav-item">
-                        <a class="nav-link" aria-current="page" href="/main">Документы</a>
+                        <a class="nav-link" aria-current="page" href="/main">Все документы</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" aria-current="page" href="/document">Добавить документ</a>
-<#--                        <a class="nav-link" aria-current="page" href="/add_doc">Добавить документ</a>-->
+                        <a class="nav-link" aria-current="page" href="/document">Новый документ</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" aria-current="page" href="/user">Панель администратора</a>
