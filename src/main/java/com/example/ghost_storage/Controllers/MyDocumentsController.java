@@ -154,8 +154,8 @@ public class MyDocumentsController {
         doc.setName(name);
         doc.setFileDesc(fileDesc);
         doc.setCodeName(codeName);
-        doc.setOKCcode(OKCcode);
-        doc.setOKPDcode(OKPDcode);
+        doc.setOkccode(OKCcode);
+        doc.setOkpdcode(OKPDcode);
         doc.setAdoptionDate(adoptionDate);
         doc.setIntroductionDate(introductionDate);
         doc.setDeveloper(developer);

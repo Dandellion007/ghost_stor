@@ -17,11 +17,11 @@
     </div>
     <div class="form-control mb-2 doc_field_block">
         <div class="doc_field_title">Код ОКС:</div>
-        <div class="doc_field_value">${document.OKCcode}</div>
+        <div class="doc_field_value">${document.okccode}</div>
     </div>
     <div class="form-control mb-2 doc_field_block">
         <div class="doc_field_title">Код ОКПД 2:</div>
-        <div class="doc_field_value">${document.OKPDcode}</div>
+        <div class="doc_field_value">${document.okpdcode}</div>
     </div>
     <div class="form-control mb-2 doc_field_block">
         <div class="doc_field_title">Дата принятия:</div>

@@ -15,8 +15,8 @@ public class Data {
     private User author;
     private String filename = "";
     private String codeName;
-    private String OKCcode;
-    private String OKPDcode;
+    private String okccode;
+    private String okpdcode;
     private String adoptionDate;
     private String introductionDate;
     private String developer;
@@ -34,8 +34,8 @@ public class Data {
                 String fileDesc,
                 User author,
                 String codeName,
-                String OKCcode,
-                String OKPDcode,
+                String okccode,
+                String okpdcode,
                 String adoptionDate,
                 String introductionDate,
                 String developer,
@@ -49,8 +49,8 @@ public class Data {
         this.fileDesc = fileDesc;
         this.author = author;
         this.codeName = codeName;
-        this.OKCcode = OKCcode;
-        this.OKPDcode = OKPDcode;
+        this.okccode = okccode;
+        this.okpdcode = okpdcode;
         this.adoptionDate = adoptionDate;
         this.introductionDate = introductionDate;
         this.developer = developer;
@@ -106,20 +106,20 @@ public class Data {
         this.codeName = codeName;
     }
 
-    public String getOKCcode() {
-        return OKCcode;
+    public String getOkccode() {
+        return okccode;
     }
 
-    public void setOKCcode(String OKCcode) {
-        this.OKCcode = OKCcode;
+    public void setOkccode(String OKCcode) {
+        this.okccode = OKCcode;
     }
 
-    public String getOKPDcode() {
-        return OKPDcode;
+    public String getOkpdcode() {
+        return okpdcode;
     }
 
-    public void setOKPDcode(String OKPDcode) {
-        this.OKPDcode = OKPDcode;
+    public void setOkpdcode(String OKPDcode) {
+        this.okpdcode = OKPDcode;
     }
 
     public String getAdoptionDate() {

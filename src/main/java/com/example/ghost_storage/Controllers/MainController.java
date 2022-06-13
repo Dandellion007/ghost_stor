@@ -20,7 +20,6 @@ import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
 
-
 @Controller
 class MainController {
     private final FileRepo fileRepo;
@@ -43,69 +42,63 @@ class MainController {
     public String main(
             @RequestParam(defaultValue = "") String descFilter,
             @RequestParam(defaultValue = "") String nameFilter,
+            @RequestParam(defaultValue = "") String codeNameFilter,
+            @RequestParam(defaultValue = "") String okccodeFilter,
+            @RequestParam(defaultValue = "") String okpdcodeFilter,
+            @RequestParam(defaultValue = "") String adoptionDateFilter,
+            @RequestParam(defaultValue = "") String introductionDateFilter,
+            @RequestParam(defaultValue = "") String developerFilter,
+            @RequestParam(defaultValue = "") String predecessorFilter,
+            @RequestParam(defaultValue = "") String contentsFilter,
+            @RequestParam(defaultValue = "") String levelOfAcceptanceFilter,
+            @RequestParam(defaultValue = "") String changesFilter,
+            @RequestParam(defaultValue = "") String statusFilter,
+            @RequestParam(defaultValue = "") String referencesAmountFilter,
             Map<String, Object> model) {
-        Iterable<Data> messages = fileRepo.findByFileDescLikeAndNameLike(li(descFilter), li(nameFilter));
+//        Iterable<Data> messages = fileRepo.findByFileDescLikeAndNameLike(li(descFilter), li(nameFilter));
+        Iterable<Data> messages =
+                fileRepo.findByFileDescLikeAndNameLikeAndCodeNameLikeAndOkccodeLikeAndOkpdcodeLikeAndAdoptionDateLikeAndIntroductionDateLikeAndDeveloperLikeAndPredecessorLikeAndContentsLikeAndLevelOfAcceptanceLikeAndChangesLikeAndStatusLikeAndReferencesAmountLike(
+                        li(descFilter),
+                        li(nameFilter),
+                        li(codeNameFilter),
+                        li(okccodeFilter),
+                        li(okpdcodeFilter),
+                        li(adoptionDateFilter),
+                        li(introductionDateFilter),
+                        li(developerFilter),
+                        li(predecessorFilter),
+                        li(contentsFilter),
+                        li(levelOfAcceptanceFilter),
+                        li(changesFilter),
+                        li(statusFilter),
+                        li(referencesAmountFilter)
+                );
 
         model.put("messages", messages);
         model.put("formAction", "/main");
         model.put("descFilter", descFilter);
         model.put("nameFilter", nameFilter);
-
+        model.put("codeNameFilter", codeNameFilter);
+        model.put("okccodeFilter", okccodeFilter);
+        model.put("okpdcodeFilter", okpdcodeFilter);
+        model.put("adoptionDateFilter", adoptionDateFilter);
+        model.put("introductionDateFilter", introductionDateFilter);
+        model.put("developerFilter", developerFilter);
+        model.put("predecessorFilter", predecessorFilter);
+        model.put("contentsFilter", contentsFilter);
+        model.put("levelOfAcceptanceFilter", levelOfAcceptanceFilter);
+        model.put("changesFilter", changesFilter);
+        model.put("statusFilter", statusFilter);
+        model.put("referencesAmountFilter", referencesAmountFilter);
         return "main";
     }
 
-//    @PostMapping("/main")
-//    public String add(
-//            @RequestParam("file") MultipartFile uploadData,
-//            @RequestParam String name,
-//            @RequestParam String fileDesc,
-//            @RequestParam String codeName,
-//            @RequestParam String OKCcode,
-//            @RequestParam String OKPDcode,
-//            @RequestParam String adoptionDate,
-//            @RequestParam String introductionDate,
-//            @RequestParam String developer,
-//            @RequestParam String predecessor,
-//            @RequestParam String contents,
-//            @RequestParam String levelOfAcceptance,
-//            @RequestParam String changes,
-//            @RequestParam String status,
-//            @RequestParam String referencesAmount,
-//            @AuthenticationPrincipal User user, Map<String, Object> model) throws IOException {
-//        Data data = new Data(
-//                name,
-//                fileDesc,
-//                user,
-//                codeName,
-//                OKCcode,
-//                OKPDcode,
-//                adoptionDate,
-//                introductionDate,
-//                developer,
-//                predecessor,
-//                contents,
-//                levelOfAcceptance,
-//                changes,
-//                status,
-//                referencesAmount
-//        );
-//        if (uploadData != null && !uploadData.getOriginalFilename().isEmpty()) {
-//            File uploadFolder = new File(uploadPath);
-//            if (!uploadFolder.exists()) {
-//                uploadFolder.mkdir();
-//            }
-//            String uuidFile = UUID.randomUUID().toString();
-//            String resultFileName = uuidFile + "." + uploadData.getOriginalFilename();
-//            uploadData.transferTo(new File(uploadPath + "/" + resultFileName));
-//            data.setFilename(resultFileName);
-//        }
-//        fileRepo.save(data);
-//        Iterable<Data> messages = fileRepo.findAll();
-//        model.put("messages", messages);
-//        return "main";
-//    }
-
     private String li(String str) {
-        return '%' + str + '%';
+        if (str.equals("")) {
+            return "%";
+        }
+        else {
+            return "%" + str + "%";
+        }
     }
 }

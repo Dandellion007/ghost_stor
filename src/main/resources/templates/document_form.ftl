@@ -19,13 +19,13 @@
             <div class="form-group mb-3">
                 <label for="OKCcode">Код ОКС</label>
                 <input class="form-control" type="text" name="OKCcode" id="OKCcode" placeholder="..."
-                        <#if document??> value="${document.OKCcode}" </#if>
+                        <#if document??> value="${document.okccode}" </#if>
                 >
             </div>
             <div class="form-group mb-3">
                 <label for="OKPDcode">Код ОКПД 2</label>
                 <input class="form-control" type="text" name="OKPDcode" id="OKPDcode" placeholder="..."
-                        <#if document??> value="${document.OKPDcode}" </#if>
+                        <#if document??> value="${document.okpdcode}" </#if>
                 >
             </div>
             <div class="form-group mb-3">
